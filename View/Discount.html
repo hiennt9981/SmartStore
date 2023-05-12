@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/discount.css">
+    <title>Discount</title>
+    <style>
+        *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+
+.DMSP > ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+li{
+    list-style: none;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* margin: 0 auto; */
+}
+.container{
+    max-width: 1500px;
+    margin: auto;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+header{
+    background-image: url('../images/004.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    
+}
+ .bg-image{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.678);
+    opacity: 0.5;
+} 
+.top{
+    position: absolute;
+    width: 100%;
+    z-index: 11;
+}
+.header-top{
+    justify-content: space-between;
+    padding: 20px 0 ;
+    margin-left: 50px;
+}
+.header-top ul{
+    display: flex;
+    margin-right: 20px;
+}
+.header-top ul li{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.header-top ul li a{
+    font-family: var(--main-text-font);
+    color: white;
+    font-size: 25px;
+    padding: 10px;
+
+}
+.header-top ul li a:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(247, 223, 68);
+    border-radius: 10px;
+}
+header h2{
+    color: #5b2626;
+
+}
+header h2:hover{
+    color: #f1f1f1;
+
+}
+
+.header-text{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    z-index: 11111;
+    font-size: 20px;
+    top: 50%;
+    left: 30%;
+    text-align: center;
+    min-width: 500px;
+    max-width: 700px;
+    color: red;
+    background-color: rgb(248, 244, 31);
+    padding: 20px;
+}
+.header-text:hover{
+    color: yellow;
+    background: red;
+    font-size: 23px;
+}
+.header-top p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 50px;
+    letter-spacing: 2px;
+    color: #fff;
+    font-weight: bold;
+}
+.SP h1{
+    font-family: Helvetica;
+    font-size: 40px;
+    text-align: center;
+    color: palevioletred;
+    padding: 15px;
+    /* width: 1540px; */
+    background-color:rgb(241, 241, 241) ;
+    
+
+}
+.DMSP{
+    display: flex;
+    justify-content: space-around;
+
+}
+.DMSP li img{
+    width: 100%;
+    height: 300px;
+    margin: 20px 0;
+}
+.DMSP li p{
+    text-align: center;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #ac0202;
+}
+.DMSP li h6{
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    text-decoration: line-through;
+}
+.DMSP li h5{
+    text-align: center;
+    font-size: 20px;
+    padding: 10px 0;
+    width: 290px;
+    color: red;
+    background-color: rgb(255, 255, 20);
+    margin-bottom: 20px;
+}
+.DMSP li button{
+    font-size: 20px;
+    padding: 5px 16px;
+    font-weight: bold;
+    background-color: rgb(243 118 163);
+    border: 1px solid black;
+    border-radius: 20px ;
+
+}
+.DMSP li button:hover{
+    color: #fff;
+    
+    background-color: rgb(204, 107, 17)
+}
+footer .img{
+    background-image: url(https://sktperfectdemo.com/demos/flowershop/wp-content/themes/flower-shop/images/slides/slider2.jpg);
+    height: 400px;
+    background-repeat: repeat;
+    margin-top: 50px;
+    
+}
+footer h1,h2{
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    
+}
+footer{
+    position: relative;
+}
+footer h1{
+    font-size: 50px;
+    padding-top: 60px;
+}
+.icon {
+    position: absolute;
+    bottom: 64px;
+    left: 534px;
+}
+.icon img{
+    font-size: 10px;
+    
+}
+.gohome{
+    font-family: Helvetica;
+    color: palevioletred;
+    font-size: 25px;
+    border: 1px solid black;
+    padding: 5px;
+    
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top">
+            <div class="container">
+                <div class="header-top row">
+                    <p><span>Smart</span>Store</p>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="bg-image">
+
+        </div>
+    
+    </header>
+    <div class="main">
+        <div class="SP">
+        <h1>SẢN PHẨM ĐANG ĐƯỢC GIẢM GIÁ TRONG THÁNG</h1>
+        </div>
+        <div class="DMSP">
+        <ul>
+            <li><img src="../Upload/1.jpg" alt=""></li>
+            <li><p>Bánh bông lan</p></li>
+            <li><h6>Giá: 28.000đ</h6></li>
+            <li><h5>Giảm còn: 25.000đ</h5></li>
+            <li><button>Đặt hàng</button></li>
+        </ul>
+        <ul>
+            <li><img src="../Upload/c2.jpg" alt=""></li>
+            <li><p>C2</p></li>
+            <li><h6>Giá: 7.000đ</h6></li>
+            <li><h5>Giảm còn: 6.500đ</h5></li>
+            <li><button>Đặt hàng</button></li>
+        </ul>
+        <ul>
+            <li><img src="../Upload/1404298271s4.jpg" alt=""></li>
+            <li><p>Sữa bột nguyên kem Devondale</p></li>
+            <li><h6>Giá: 520.000đ</h6></li>
+            <li><h5>Giảm còn: 490.000đ</h5></li>
+            <li><button>Đặt hàng</button></li>
+            
+        </ul>
+        
+        </div>
+        <div class="DMSP">
+        <ul>
+            <li><img src="../Upload/79850613s8.jpg" alt=""></li>
+            <li><p>Sữa đậu nành Fami</p></li>
+            <li><h6>Giá: 5.900đ</h6></li>
+            <li><h5>Giảm còn: 5.500đ</h5></li>
+            <li><button>Đặt hàng</button></li>
+        </ul>
+        <ul>
+            <li><img src="../Upload/s18.jpg" alt=""></li>
+            <li><p>Sữa Cadier Gold</p></li>
+            <li><h6>Giá: 265.000đ</h6></li>
+            <li><h5>Giảm còn: 245.000đ</h5></li>
+            <li><button>Đặt hàng</button></li>
+        </ul>
+        <ul>
+            <li><img src="../Upload/408525279redbull.jpg" alt=""></li>
+            <li><p>Nước tăng lực Redbull</p></li>
+            <li><h6>Giá: 16.000đ</h6></li>
+            <li><h5>Giảm còn: 15.000đ</h5></li>
+            <li><button>Đặt hàng</button></li>
+        </ul>
+        
+        </div>
+        <div class="DMSP">
+        <ul>
+            <li><img src="../Upload/s1.jpg" alt=""></li>
+            <li><p>Sữa Anlene</p></li>
+            <li><h6>Giá: 512.000đ</h6></li>
+            <li><h5>Giảm còn: 499.000đ</h5></li>
+            <li><button>Đặt hàng</button></li>
+        </ul>
+        <ul>
+            <li><img src="../Upload/20529345431697530016s5.jpg" alt=""></li>
+            <li><p>Sữa vinamilk</p></li>
+            <li><h6>Giá: 34.000đ</h6></li>
+            <li><h5>Giảm còn: 32.000đ</h5></li>
+            <li><button>Đặt hàng</button></li>
+        </ul>
+        <ul>
+            <li><img src="../Upload/795076680k14.png" alt=""></li>
+            <li><p>Chocolate Topvalu</p></li>
+            <li><h6>Giá: 110.000đ</h6></li>
+            <li><h5>Giảm còn: 100.000đ</h5></li>
+            <li><button>Đặt hàng</button></li>
+        </ul>
+        
+        </div>
+    </div>
+    </body>
+    </html>
+    <br><br>
+    <center><a class="gohome btn btn-info" href="\SmartStore/index.php"> Về Trang Chủ </a></center>
+    <footer>
+        <div class="img">
+            <H1>
+                SmartStore
+            </H1>
+            <h2>Agile7</h2>
+        </div>
+        <div class="icon">
+            <img src="Images/screenshot_1649273824.png" alt="">
+         </div>
+    </footer>
+</body>
+</html>
