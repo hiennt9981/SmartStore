@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2021 at 05:31 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Generation Time: May 08, 2023 at 05:24 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,20 +31,18 @@ CREATE TABLE `categories` (
   `CategoryID` int(11) NOT NULL,
   `CategoryName` varchar(255) NOT NULL,
   `Position` int(11) DEFAULT 0
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`CategoryID`, `CategoryName`, `Position`) VALUES
-(1, 'Cà phê pha sẵn', 0),
-(2, 'Cà phê hòa tan', 0),
-(3, 'Cà phê nguyên chất', 0),
-(4, 'Cà phê hạt', 0),
-(5, 'Trà khô', 0),
-(6, 'Trà túi lọc', 0),
-(7, 'Trà sữa hòa tan ', 0);
+(1, 'Bánh\r\n', 1),
+(2, 'Nước giải khát', 0),
+(3, 'Sữa', 0),
+(4, 'Kẹo', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -54,7 +52,7 @@ INSERT INTO `categories` (`CategoryID`, `CategoryName`, `Position`) VALUES
 CREATE TABLE `groups` (
   `GroupID` int(11) NOT NULL,
   `GroupName` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `groups`
@@ -75,20 +73,19 @@ INSERT INTO `groups` (`GroupID`, `GroupName`) VALUES
 CREATE TABLE `manufacturers` (
   `ManufacturerID` int(11) NOT NULL,
   `ManufacturerName` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `manufacturers`
 --
 
 INSERT INTO `manufacturers` (`ManufacturerID`, `ManufacturerName`) VALUES
-(1, 'Cà phê thượng hạng'),
-(2, 'Cà phê sáng tạo'),
-(3, 'Cà phê tiện lợi'),
-(4, 'Quà tặng'),
-(5, 'Trà cao cấp'),
-(6, 'Trà dưỡng sinh');
-
+(1, 'Nước đóng chai'),
+(2, 'Nước đóng lon'),
+(3, 'Sữa hộp'),
+(4, 'Sữa thùng'),
+(5, 'Kẹo '),
+(6, 'Bánh');
 
 -- --------------------------------------------------------
 
@@ -100,14 +97,13 @@ CREATE TABLE `orderitems` (
   `OrderID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL DEFAULT 0
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `orderitems`
 --
 
 INSERT INTO `orderitems` (`OrderID`, `ProductID`, `Quantity`) VALUES
-
 (1, 100, 1);
 
 -- --------------------------------------------------------
@@ -127,7 +123,7 @@ CREATE TABLE `orders` (
   `Sum` int(11) DEFAULT NULL,
   `Status` text NOT NULL DEFAULT 'Chưa xác nhận',
   `Mode` varchar(400) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `orders`
@@ -152,59 +148,34 @@ CREATE TABLE `products` (
   `Quantity` int(11) NOT NULL DEFAULT 0,
   `Description` varchar(1000) NOT NULL,
   `Body` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`ProductID`, `ManufacturerID`, `CategoryID`, `ProductName`, `ImageUrl`, `Price`, `Quantity`, `Description`, `Body`) VALUES
--- (100,2,3,'Cà phê Trung Nguyên S','100.jpg',56000,10,'Cà phê Trung Nguyên chinh phục mang trong mình vị đắng quen thuộc và hương thơm tự nhiên vốn có, sản phẩm được tạo ra để mang đến niềm đam mê về một loại cà phê nguyên chất và thuần khiết.','Khối lượng: 500g. Thành phần: Arabica, Robusta, Catimor, Excelsa.');
-(100,1,3,'Cà phê Trung Nguyên S','100.jpg',56000,10,'Cà phê Trung Nguyên chinh phục mang trong mình vị đắng quen thuộc và hương thơm tự nhiên vốn có, sản phẩm được tạo ra để mang đến niềm đam mê về một loại cà phê nguyên chất và thuần khiết.','Khối lượng: 500g. Thành phần: Arabica, Robusta, Catimor, Excelsa.'),
-(101,3,2,'Cà phê Net Việt','101.jpg',109000,10,'Vị cà phê đắng đặc trưng, mạnh mẽ nay được bổ sung thêm hương vị cà phê nguyên chất cho hương vị cực mạnh càng thêm hấp dẫn, khơi dậy nguồn hứng khởi cho thể chất và tinh thần. ','Khối lượng: 560g.'),
-(102,3,1,'Cà phê sữa đá Highlands','102.jpg',57000,10,'Chế biến từ những hạt cà phê đã qua tuyển chọn kỹ càng, với công thức pha chế tinh tế, vẫn giữ nguyên hương vị đậm đà, thơm ngon của cà phê nguyên chất. phẩm cà phê pha sẵn tiện lợi và thơm ngon cho bạn cảm giác tỉnh táo, sảng khoái nhanh chóng','Sản phẩm gồm 1 lốc/ 6 lon. Dung tích: 235ml/lon'),
-(103,1,3,'Cà Phê Arabica Cầu Đất Rang Mộc DalatFarm - Hộp 250gr (Dạng Bột)','103.jpg',150000,10,'Cà phê Arabica Cầu Đất được trồng từ vùng nguyên liệu cà phê Cầu Đất - Đà Lạt, nơi được mệnh danh là thủ phủ Arabica, chất lượng lâu đời tại Việt Nam. ','Thành phần: 100% từ những trái cà phê Arabica chín cây từ vùng nguyên liệu cà phê Cầu Đất - Đà Lạt tốt nhất Việt Nam.'),
-(104,1,3,'Hộp cà phê sáng tạo 8( kèm phin) Trung nguyên','104.jpg',458000,10,'Hộp SÁNG TẠO 8 của Trung Nguyên được gọi là "Cà phê của nguyên thủ và ngoại giao” vì sự đặc biệt trong hương vị của nó. với các loại cà phê thông thường. Đó là sự tinh túy của sản phẩm này. ','Trong hộp quà sáng tạo 8 combo gồm: Hộp cà phê sáng tạo 8 với trọng lượng cà phê 500gam được đóng gói hút chân không rất đảm bảo cho chất lượng của cà phê.'),
-(105,3,2,'Cà phê sữa G7 3 in 1 ','105.jpg',53400,10,'Cà phê hòa tan G7 3 trong 1 được chiết xuất từ những phần tinh túy nhất có trong từng hạt cà phê với hương vị khác biệt, đậm đà, hương thơm độc đáo quyến rũ mà không một sản phẩm cà phê hòa tan nào khác đạt được giúp bạn nhanh chóng tỉnh táo, sảng khoái tinh thần để tập trung làm việc.','Khối lượng : 336g'),
-(106,3,2,'Cà phê sữa G7 gu mạnh X2','106.jpg',48400,10,'G7 gu mạnh X2 là dòng sản phẩm cà phê hòa tan có hương vị có hương vị cà phê đậm đặc gấp đôi cho những người có gu cà phê mạnh thứ thiệt, mang đến cho bạn một ly cà phê đậm đà đúng gu với chất cà phê mạnh mẽ.','Khối lượng : 300g'),
-(107,3,2,'Cà phê đen đá G7 2 in 1','107.jpg',49000,10,'G7 2 in 1 là sản phẩm cà phê hòa tan mang hương vị đặc trưng thuần túy của cà phê đen đá thứ thiệt, đúng gu hương vị của cà phê rang xay Trung Nguyên.','Khối lượng : 240g'),
-(108,3,2,'Cà phê sữa TNI King Coffee 3 in 1','108.jpg',33400,10,'Cà phê sữa TNI King Coffee 3 in 1 240g được tuyển chọn từ những hạt cà phê tốt nhất trên vùng đất Buôn Mê Thuột trứ danh kết hợp với vị sữa thơm ngọt, cho bạn một tách cà phê sữa hấp dẫn.','Khối lượng : 240g'),
-(109,3,2,'Cà phê đen đá MacCoffee Café Phố','109.jpg',28300,10,'Cà phê đen đá MacCoffee Café Phố mang đến cho người dùng những trải nghiệm cà phê đầy tinh tế với những ly cà phê đen sánh quyện, đậm đặc cùng hương thơm nồng nàn quyến rũ.','Khối lượng : 160g'),
-(110,3,1,'Cà phê sữa TASTY chai 200ml','110.jpg',88000,10,'Chai thủy tinh dẹt, dung tích 200m (4 lần uống).Cách bảo quản: để trong ngăn mát tủ lạnh (3°C - 5°C).HSD: 72 giờ, nên sử dụng trong 24H kể từ khi mở nắp.Thành phần: cà phê Lâm Đồng pha phin, sữa đặc, sữa béo.','Khối lượng : 200ml'),
-(111,3,1,'Cà Phê Sữa Acafela Caramel Macchiato Binggrae','111.jpg',23400,10,'Cà phê sữa Acafela được nhập khẩu trực tiếp từ Hàn Quốc. Thiết kế đóng chai 240ml nhỏ gọn, có thể mang theo mọi lúc, mọi nơi. Sản phẩm phù hợp cho những người bận rộn không có thời gian ra quán cà phê, góp phần đem lại một buổi sáng bắt đầu hứng khởi cho bạn. Hương Caramel Macchiato thơm ngon, đem lại trải nghiệm thú vị cho người dùng.','Khối lượng : 240ml'),
-(112,3,1,'Cà Phê Sữa Acafela Vanilla Latte Binggrae','112.jpg',23400,10,'Cà phê sữa Acafela được nhập khẩu trực tiếp từ Hàn Quốc. Thiết kế đóng chai 240ml nhỏ gọn, có thể mang theo mọi lúc, mọi nơi. Sản phẩm phù hợp cho những người bận rộn không có thời gian ra quán cà phê, góp phần đem lại một buổi sáng bắt đầu hứng khởi cho bạn. Hương Vanilla Latte thơm ngon, đem lại trải nghiệm thú vị cho người dùng.','Khối lượng : 240ml'),
-(113,3,1,'Cà phê Cappuccino Sữa Dừa Hạt A Cafe pha sẵn ','113.jpg',65000,10,'Cà phê sữa dừa là một thức uống giúp thoải mái tinh thần và tốt cho sức khỏe. Cà phê pha sẵn đóng chai vị sữa dừa của HẠT A CAFE là sự kết hợp, hòa quyện tinh tế giữa cà phê nguyên chất cùng một chút vị ngọt, thơm, ngậy của dừa non, thêm lớp kem mỏng beo béo của Cappuccino giúp người dùng thưởng thức trọn vẹn các hương vị trong tách cà phê.','Khối lượng : 250ml'),
-(114,3,1,'Cà phê Hạt Dẻ Mật Ong Hạt A Cafe pha sẵn','114.jpg',70000,10,'Cà phê pha sẵn đóng chai vị hạt dẻ mật ong là sản phẩm sáng tạo, độc đáo, đáp ứng sở thích của khách hàng.  Sử dụng nguyên liệu được chiết xuất từ hạt dẻ kết hợp vị ngọt nhẹ của mật ong đã tạo nên một loại cà phê hạt dẻ mật ong quyến rũ có một không hai. Vị vừa có sự hòa quyện của cà phê, hạt dẻ và mật ong, vừa tách biệt ba loại hương vị ra, giúp người thưởng thức trọn vẹn các hương vị trong tách cà phê. Thưởng thức một tách cà phê vào buổi sáng mang lại cho bạn tinh thần phấn chấn, tỉnh táo và làm việc có hiệu quả cao.  Cà phê hạt dẻ mật ong đóng chai giúp tiết kiệm thời gian mà vẫn có thể thưởng thức tách cà phê thơm ngon, trọn vẹn. Thích hợp với nhiều đối tượng, nhiều độ tuổi. ','Khối lượng : 250ml'),
-(115,3,3,'Cà phê Arabica Cầu Đất nguyên chất','115.jpg',159000,10,'Cà phê Arabica Cầu Đất nguyên chất là một loại cà phê thơm ngon nức lòng người thưởng thức, không chỉ nổi tiếng ở thị trường nội địa Việt Nam, mà hầu hết những nơi rang xay chuyên nghiệp trên thế giới đều biết đến cà phê Arabica Cầu Đất bởi hương vị, chất lượng được đánh giá rất cao không thua kém gì các loại cà phê trên thế giới. Đặc Trưng: Vị chua thanh, thơm nhẹ, hậu ngọt, hương trái cây phong phú Phù hợp: Gu Nhẹ, tinh tế. Dùng pha phin, pha máy Espresso','Khối lượng : 500g, Nguyên liệu: 100% Từ hạt cà phê Arabica được hái lựa trái chín, lên men, chế biến ướt, phơi giàn trong nhà kính.'),
-(116,2,3,'Cà phê nguyên chất GUfill - 100% Robusta Đăk Lăk rang mộc ','116.jpg',160000,10,'Robusta là loại cà phê có hàm lượng caffeine vượt trội (tới 2,2 - 2,7%), gần gấp đôi so với Arabica (chỉ có 1,2% - 1,5%). ','Khối lượng : 500g, Nguyên liệu: 100% Robusta rang mộc nguyên chất.'),
-(117,3,3,'Cà phê Culi (Thảo Nguyên)','117.jpg',125000,10,'Hạt cà phê Culi là những hạt cà phê no tròn. Đặc biệt là trong một trái chỉ có duy nhất một hạt. V','Khối lượng : 500g, Nguyên liệu: 100% Hạt cà phê Culi.'),
-(118,1,3,'Cà phê Premium Blend Trung Nguyên Legend','118.jpg',154000,10,'Cà phê rang xay Premium Blend là một sản phẩm cà phê đặc biệt được chắt lọc từ những vùng nguyên liệu ngon nhất thế giới kết hợp công nghệ sản xuất hàng đầu và phương thức rang xay độc đáo không thể sao chép của Trung Nguyên,mang đến hương vị quyến rũ, đậm đà.','Khối lượng : 425g (Lon), Nguyên liệu: Arabica, Robusta, Excelsa, Catimor.'),
-(119,4,3,'Cà phê chồn Legendee Trung Nguyên','119.jpg',880000,10,'Cà phê cao cấp chồn Legend Trung Nguyên là cafe được sản xuất bằng phương pháp “Lên men sinh học”. ','Khối lượng : 225g , Nguyên liệu: Arabica, Robusta, Excelsa.'),
-(120,2,4,'Cà Phê Moka Nguyên Chất (Moka Pure Coffee)','120.jpg',319000,10,'Cà Phê Moka Hạt Nguyên Chất sạch 100% đặc biệt có vị đắng nhẹ xen lẫn chua thanh hài hòa cùng với vị béo cùng chất dầu trong hạt Moka. Mùi thơm nồng nàn gây ấn tượng và chinh phục. ','Khối lượng : 1kg , Cà Phê Moka Nguyên Chất Sạch 100%'),
-(121,2,4,'ESPRESSO BLEND','121.jpg',219000,10,'Cafe Nguyên Chất Hạt Espresso Blend sạch 100% đặc biệt có hương vị tinh túy tự nhiên nhất được giữ nguyên vẹn trong từng giọt cà phê nguyên chất theo phong cách Ý.','Khối lượng : 1kg , Cà Phê Nguyên Chất Moka và Robusta Sạch 100%'),
-(122,2,4,'CÀ PHÊ HẠT CULI THƯỢNG HẠNG','122.jpg',240000,10,'Cà phê hạt xay Drip – Premium Culi (hạt số 4) gồm những hạt Culi thượng hạng được của tất cả các loại cà phê Arabica, Robusta, Excelsa và Catimor, được Trung Nguyên sản xuất trên công nghệ hàng đầu và bí quyết không thể sao chép từ các chuyên gia trung nguyên nên có mùi vị rất thơm ngon, quyến rũ.','Khối lượng : 1kg , 100% Hạt Cà Phê thiên nhiên'),
-(123,2,4,'CÀ PHÊ HẠT MỘC SUCCESS','123.jpg',330000,10,'Là loại cà phê siêu hạng có hương vị độc đáo và đầy thử thách. Mùi hương dịu nhẹ nhưng rất đa dạng; Thể chất mạnh nhưng cân bằng, hậu vị ngọt dịu.','Khối lượng : 1kg , Là loại cà phê siêu hạng có hương vị độc đáo và đầy thử thách. Mùi hương dịu nhẹ nhưng rất đa dạng; Thể chất mạnh nhưng cân bằng, hậu vị ngọt dịu.'),
-(124,2,4,'CÀ PHÊ HẠT SUCSESS 8 TRUNG NGUYÊN','124.jpg',340000,10,'100% hạt Arabica mang lại hương vị trái cây, tròn vị, thể chất mạnh nhưng cân bằng, hậu vị ngọt dịu.','Khối lượng : 340g, Thành phần chính của cà phê mộc success 8 được chọn lọc từ những hạt Arabica cao cấp, ngon nhất trong nước và trên thế giới.'),
-(125,6,5,'Trà Lài Thượng Hạng','125.jpg',175000,10,'Trà lài là loại trà được chế biến từ việc ướp trà xanh thái nguyên chung với hoa lài để tạo ra thức uống vừa có vị chát nhẹ, hậu ngọt và mang hương lài tươi thơm mát.','Khối lượng : 250g, Nguyên liệu: Trà xanh Tân Cương Thái Nguyên thượng hạng ướp hoa lài tươi'),
-(126,6,5,'Trà Saffron Salam','126.jpg',450000,10,'Saffron Salam là dòng sản phẩm nhụy hoa nghệ tây cao cấp nhất, được canh tác, trồng trọt và thu hoạch theo tiêu chuẩn hữu cơ, xanh, sạch 100%. Saffron SALAM là những sợi nhụy hoa nghệ tây loại 1 được thu hoạch từ những cây hoa đang ở độ 4 – 5 năm tuổi, sinh trưởng và phát triển tốt nhất.','Khối lượng : 1g (500 sợi nhụy), Nguyên liệu: '),
-(127,6,5,'Trà hoa cúc đường phèn','127.jpg',200000,10,'Trà hoa cúc đường phèn được ưa chuộng bởi chúng không những thơm, dễ uống, đẹp mắt mà còn mang lại rất nhiều lợi ích cho sức khỏe. Một ly trà hàng ngày sẽ giúp bạn có được một trái tim khỏe mạnh, tốt cho tim mạch, thị lực, giúp giải cảm, ngăn ngừa ung thư, ngủ ngon, hạ huyết áp.','Khối lượng : 250g, Nguyên liệu: Hoa cúc, đường phèn'),
-(128,6,5,'Trà Atiso đỏ','128.jpg',200000,10,'Trà hoa Atiso đỏ là loài hoa nhiệt đới được cả thế giới yêu mến vì vẻ đẹp rực rỡ, vị chua đặc trưng và giá trị tuyệt vời cho sức khỏe. Qua quá trình gieo trồng tự nhiên đến khi những cánh hoa mềm rụng xuống từng đài quả sẽ được thu hoạch và chọn lọc trước khi đưa vào chế biến sấy khô. ','Khối lượng : 200g, Nguyên liệu: 100% hoa Atiso Đỏ tươi tự nhiên sấy lạnh.'),
-(129,6,5,'Trà hoa đậu biếc khô','129.jpg',250000,10,'Trà Hoa Đậu Biếc hay còn được gọi với cái tên thân thương Trà Lam Hồ Điệp với màu tim tím đặc trưng. Đây cũng là một trong những loài hoa bền bỉ sống được chung với những đợt nắng hạn gay gắt. Bên cạnh đó loại trà này cũng mang lại những công dụng tuyệt vời đối với cơ thể chúng ta. ','Khối lượng : 500g, Nguyên liệu: Trà Hoa Đậu Biếc được sấy khô 100% từ hoa đậu biếc được chọn lọc kỹ càng, an toàn, hiệu quả đáp ứng đầy đủ tiêu chuẩn vệ sinh an toàn thực phẩm của Bộ Y tế.'),
-(130,5,6,'Trà túi lọc Cozy 50g (25 túi x 2g/gói) - Đầy đủ các hương trái cây - Nguyên liệu pha chế trà sữa nhanh tiện lợi','130.jpg',40000,10,'Trà Cozy là thức uống bổ dưỡng, phù hợp với mọi lứa tuổi. Giúp tinh thần thoải mái tăng cường sức khỏe và làn da tươi trẻ. Với thành phần chính là tinh chấtthiên nhiên thơm mát, đậm đà vị trà tự nhiên. ','hộp 50g(25 túi x2g)'),
-(131,5,6,'Trà túi lọc Lipton nhãn vàng 50G(25 túi x2g)','131.jpg',117000,10,'Trà Túi Lọc Lipton Nhãn Vàng với công thức được pha chế từ hơn 30 loại trà khác nhau, trà có vị chát nhẹ và đọng lại dư vị thanh ngọt, là sự lựa chọn của những người sành thưởng thức trà nhưng mong muốn có sự tiện lợi, nhanh chóng. Trà túi lọc Lipton nhãn vàng rất tốt cho sức khỏe, với hoạt chất Flavonoid giúp giảm nguy cơ mắc bệnh tim mạch, ung thư, làm dịu các hiện tượng dị ứng do thức ăn, thời tiết. Bạn có thể sử dụng trà Lipton theo dạng nóng hoặc đá đều ngon, để bắt đầu những câu chuyện thú vị cho cả gia chủ và khách quí.','100G(50 túi x2g)'),
-(132,5,6,'Trà túi lọc Atiso','132.jpg',70000,10,'Atiso đang được bình chọn là 1 trong những thương hiệu trà túi lọc ngon nhất bán tại thị trường trà túi lọc Việt Nam hiện nay. Nguyên liệu 100% từ thân, lá và hoa cây Atiso. Cây Atiso có nguồn gốc miền Nam Châu Âu được người Pháp di thực vào Việt Nam từ thế kỷ trước. Hiện Atiso được trồng nhiều ở Đà lạt, Sapa, Tam đảo. ','200g/100 túi'),
-(133,5,6,'Trà túi lọc Dilmah','133.jpg',40000,10,'Trà túi lọc Dilmah hay còn được gọi là trà đen. Là một loại trà thường có vị đậm hơn và chứa nhiều caffeine hơn so với các loại trà xanh. – Khác hẳn trà xanh là trong quá trình chế biến, trà đen sẽ không qua giai đoạn diệt men ngay. Trà đen còn thêm giai đoạn lên men để tạo ra những biến đổi sinh hóa cần thiết làm cho màu sắc và hương vị của thành phẩm sau này có những đặc tính riêng mà các loại trà khác không có được. ','30g/20 túi'),
-(134,5,6,'Trà túi lọc chùm ngây','134.jpg',45000,10,'Trà túi lọc chùm ngây được chế biến từ lá cây chùm ngây. Là loại lá có chứa tới 46 chất chống oxy hóa, đặc biệt là vitamin C và vitamin A.  Những chất chống oxy hóa này có tác dụng tàn phá gốc tự do, từ đó bảo vệ chúng ta khỏi bệnh ung thư và các bệnh thoái hóa như thoái hóa điểm vàng và bệnh xơ nang.ông sử dụng cho phụ nữ mang thai.','20 túi x 2.5g'),
-(135,3,7,'Trà sữa hòa tan Trần Quang Tea ','135.jpg',57000,10,'Hương vị trà sữa truyền thống làm từ lá trà đen thơm đậm vị.Q Express Trà Sữa Tea mix dành cho bạn hương vị thơm ngon từ bột kem béo ngậy và vị ngọt thanh sảng khoái.','Khối lượng : 24 gói x20G'),
-(136,3,7,'Trà Sữa Hòa Tan Vị Truyền Thống WIL Dạng Bột Bổ Sung Năng Lượng Thư Giãn Giải Khát','136.jpg',42000,10,'Trà Sữa Truyền Thống WIl với đậm vị trà hòa kết hợp cùng vị béo thơm của sữa mang đến một thức uống thơm ngon được nhiều người ưa thích. Chỉ với 2 bước thực hiện cùng trà sữa hòa tan vị truyền thống là bạn đã có ngay 1 ly trà sữa đậm trà béo sữa thơm ngon. Còn gì tuyệt vời hơn khi cùng bạn bè nhâm nhi một ly trà sữa thơm ngon đậm vị!','Khối lượng : 17g x 10 túi Thành phần: Non-dairy creamer, đường, đường dextrose, sữa bột nguyên kem (1%-5%), tinh chất trà (3%-5%), màu caramel tổng hợp (150c), hương sữa tổng hợp, hương trà đen tổng hợp, chất tạo ngọt tổng hợp (950), chất làm dày (415).'),
-(137,3,7,'Matcha Trà Sữa Hòa Tan MaikaFood','137.jpg',40000,10,'Trà sữa Matcha Maika được sản xuất trên dây chuyền hiện đại mang đến một sản phẩm tuyệt hảo có hương vị đậm đà đặc trưng của trà xanh matcha.','Khối lượng : 17g x 10 túi Thành phần: Bột Trà Matcha Maika 3%, bột kem không sữa, bột sữa nguyên kem 0,2%, đường kính.'),
-(138,3,7,'Trà sữa dâu hòa tan Blendy [VN] AJINOMOTO Strawberry Milk Tea','138.jpg',47900,10,'Trà Sữa Dâu Blendy phiên bản mới ra mắt vào tháng 4/2021 với công thức Ít đường có vị ngọt dịu, kết hợp vị chua nhẹ của dâu Đà Lạt tạo nên thức uống lạ miệng và hài hòa. ','Khối lượng :10 túi x 18g Thành phần: Đường, bột kem không sữa, maltodextrin, bột trà 4,9% (bột trà Thái Nguyên 2,9%), bột sữa nguyên kem (0,2%), bột chiết xuất dâu (3%),...'),
-(139,3,7,'Trà sữa hòa tan [VN] NESTEA Milk Tea ','139.jpg',41900,10,'Trà Sữa NESTEA lấy cảm hứng từ vùng đất Đài Loan - thủ phủ của món trà sữa lừng danh. NESTEA nay giới thiệu trà sữa NESTEA Milk Tea hoàn toàn mới. Vị trà thơm quyến rũ kết hợp cùng vị sữa dịu ngọt sẽ đưa các giác quan của bạn đến xứ Đài chỉ với một ngụm trà. ','Khối lượng : 8 Gói x 20g Thành phần: Đường, bột kem (có chứa sữa), sữa bột tách kem, trà tinh chiết, maltodextrin, bột whey (có chứa sữa), hương tổng hợp (hương trà, hương sữa đặc). '),
-(140,2,2,' Set Quây Quần món quà từ Cộng Cà Phê','140.jpg',550000,10,'Một mùa xuân mới lại sắp về vì thế trong thời điểm này, bạn có thể bắt đầu lên kế hoạch các món quá cũng như kinh phí cho dịp tết sắp tết và chắc rằng trong đó không thể thiếu những hộp quà ý nghĩa.','01 Túi vải địa phương xanh Cộng, 01 Bình giữ nhiệt Cộng 600ml, 01 cà phê bạc xỉu C+, 01 Camen Cộng 360ml, 01 Hộp ô mai đặc sản Hồng Lam, 01 Hộp bút bi vỏ lúa mạch, 01 Khay gỗ- 01 Túi vải địa phương xanh Cộng'),
-(141,4,2,'Set quà tặng 2022, Set Liên Lạc mới, Cộng Cà Phê','141.jpg',310000,10,'Một mùa xuân mới lại sắp về vì thế trong thời điểm này, bạn có thể bắt đầu lên kế hoạch các món quá cũng như kinh phí cho dịp tết sắp tết và chắc rằng trong đó không thể thiếu những hộp quà ý nghĩa.','01 Hộp trà Cozy, 01 Hộp ô mai đặc sản Hồng Lam, 01 Cà phê bạc xỉu C+, 01 Stick Cà phê bạc xỉu C+, 01 Sổ liên lạc, 01 Túi vải địa phương xanh Cộng, 01 Khay gỗ'),
-(142,4,5,'BỘ HỘP TRÀ LÀM QUÀ TẶNG - BAMBOO GIFT SET','142.jpg',335000,10,'Một mùa xuân mới lại sắp về vì thế trong thời điểm này, bạn có thể bắt đầu lên kế hoạch các món quá cũng như kinh phí cho dịp tết sắp tết và chắc rằng trong đó không thể thiếu những hộp quà ý nghĩa.','1 hộp đựng trà lớn 20cm (khắc theo yêu cầu hoặc mẫu khắc sẵn câu chúc ngẫu nhiên) (hộp đựng trà không bao gồm trà),3 ly tre nhỏ 8cm có khắc, 1 Hộp đựng bằng tre đan'),
-(143,4,5,'Trà Ô Long Đài Loan - Hộp Phúc Lộc Đỏ 400gram','143.jpg',550000,10,'Đặc tính của trà ô long do công ty cung cấp là không sử dụng bất kì hương hay phụ gia nào trong quá trình chế biến, mà đó là mùi hương đặc trưng sẵn có của trà ô long. ',' 400gram bao gồm 02 gói 200gram được bảo quản trong bao nhôm hút chân không đựng trong 2 hộp sắt và đặt trong khay sang trọng'),
-(144,4,2,'Hộp quà tặng Real Bean Coffee Combo Gift Set (Cà phê rang xay nguyên chất Culi)','144.jpg',250000,10,'Ý nghĩa, sang trọng dành tặng cho người thân, bạn bè và đối tác, đặc biệt là những ai yêu thích hương vị cà phê nguyên chất pha phin truyền thống của Việt Nam','1 túi cà phê 250g: cà phê rang xay nguyên chất. VỊ ĐẬM ĐÀ, HƯƠNG THƠM NỒNG, HẬU VỊ NGỌT KÉO DÀI,1 phin pha cafe nhôm chịu nhiệt, 1 ly sứ trắng có quai');
+(521, 6, 1, 'Bánh cupcake', '12661524845.jpg', 22000, 4, 'Cupcake cũng là một trong các loại bánh ngọt dễ làm, dễ ăn và cung cấp nhiều dinh dưỡng. Món bánh này có thể dùng ăn sáng, dùng trong các bữa tiệc sinh nhật hoặc là món bánh ăn vặt tuyệt hảo.', 'Đường, sữa,...'),
+(522, 6, 1, 'Bánh dừa', '15657258966.jpg', 10000, 5, 'Nếu bạn thích một  món bánh vừa ngọt, vừa béo thì bánh dừa với nhân bánh beo béo, dai dai, kết hợp vỏ bánh phủ đầy lạc rang/vừng chính là món bánh ngon không thể bỏ qua. Món bánh có nguyên liệu đơn giản, dễ tìm và dễ làm tại nhà.', 'Đường, sữa, dừa....'),
+(520, 6, 1, 'Bánh kem phô mai sầu riêng', '6874925523.jpg', 35000, 12, 'Bánh vừng cũng là một trong các loại bánh ngọt dễ làm không cần lò nướng với hương thơm vừng thoang thoảng, vị giòn xốp rất thích hợp làm món ăn vặt văn phòng hoặc nhâm nhi cùng trà chiều.', 'Đường, sữa, sầu riêng,...'),
+(518, 6, 1, 'Bánh bông lan', '4386193101.jpg', 25000, 10, 'Bánh bông lan là một trong các loại bánh ngọt dễ làm mà bạn có thể tự tay vào bếp để chuẩn bị. Chiếc bánh xốp mềm mịn này không chỉ thơm ngon mà còn giàu dinh dưỡng, thích hợp để ăn sáng và ăn các bữa phụ trong ngày.', 'Đường, trứng, sữa...'),
+(519, 6, 1, 'Bánh donut kem trứng', '4829624422.jpg', 30000, 12, 'Bạn có thích những chiếc bánh donut thơm phức mùi bơ sữa không? Đây cũng là món bánh ngọt cực hấp dẫn với lớp vỏ giòn tan phủ đường, lớp nhân kem béo ngậy bên trong. Fan bánh ngọt chắc hẳn  không thể kìm lòng với lớp ruột bánh dai dai nhai đến đâu “ghiền” đến đó.', 'Đường, trứng muối, sữa , phố mai...'),
+(517, 5, 4, 'Socola đen TOBLERONE ', '1133968623742900032k7.jpg', 69000, 45, 'Socola đen TOBLERONE thanh 100g là sản phẩm kẹo socola nổi tiếng được nhập khẩu từ Thụy Sỹ với hình dáng lạ mắt. Hương vị kẹo socola TOBLERONE ngọt thanh với vị cacao khối đắng nhẹ nhàng hấp dẫn.', 'Cacao khối (46%), đường, chất béo sữa dạng khan, mật ong, hạnh nhân, bơ cacao (1.2%) chất nhũ hóa, lòng trắng trứng, chất chống oxy hóa.'),
+(516, 5, 4, '5.	Kẹo dẻo cuộn vị cola Play More ', '1366097323946166558k5.jpg', 10000, 45, 'Từng viên kẹo dẻo mềm dai, thơm ngon, với khuôn hình cuộn dài có lớp giấy mỏng bọc quanh, vị cola chua ngọt hài hoà, kích thích vị giác. Kẹo dẻo cuộn vị cola Play More gói 21g thơm thơm, ăn có vị ngọt thanh, kẹo mềm lại dai vô cùng thích. Kẹo mềm Play More là thương hiệu của Thái Lan', 'Si rô glucose 36.20%, đường 32.70%, nước ép dâu cô đặc 20.00%, si rô bắp 6.00%, chất ôn định (TNS 440) 2.10%, chất điều chỉnh độ acid (INS 330) 1.80%, màu Ponceau 4R nhân tạo (INS 124), chất tạo gel ,q—N§ 406), chất điều chỉnh độ acid (INS 296, INS 331()), chất làm dầy (INS 415), hương cola tổng hợp 0.5%.'),
+(515, 5, 4, '4.	Kẹo Ferrero Confetteria Raffaello ', '19724660981340801151k4.jpg', 190000, 25, 'Với lớp dừa khô được phủ bền ngoài, bên trong có một lớp kem cứng và kẹp giữa là một lớp vỏ giòn tan kết hợp với nhau thật đúng điệu. Kẹo Ferrero Confetteria Raffaello hộp 150g tiện lợi, được đóng gói từng viên riêng tiện lợi.  Kẹo Ferrero được sản xuất tại Ba Lan', 'Dừa khô 25.5%, chất béo thực vật, đường, hạt hạnh nhân nguyên hạt 8%, sữa bột gầy, whey bột, bột mì, tinh bột sắn, hương liệu tự nhiên và giống tự nhiên, chất nhũ hoá, chất tạo xốp'),
+(514, 5, 4, 'Kẹo Snickers', '15579393141216857775k3.jpg', 19500, 66, 'Kẹo socola Snickers thanh 240g là sản phẩm kẹo của thương hiệu socola Snickers với vị socola sữa hòa quyện ngọt thơm. Sản phẩm socola được sản xuất từ ca caao kết hợp cùng bơ, sữa và các nguyên liệu chất lượng khác.', 'Sản phẩm chứa socola sữa (chứa 25% cacao rắn, 23% sữa đặc (5% chất béo sữa)), 27% caramen, 22% đậu phộng, 16% kẹo nougat. Socola sữa (đường, bơ cacao, ca cao khối, sữa bột tách kem, lactose, chất béo sữa, chất béo thực vật,...'),
+(513, 5, 4, 'Kẹo socola Mars', '1394726318k1.jpg', 23000, 45, 'Kẹo socola có nhân caramel bên trong ăn rất ngon và ngọt cho những ai đam mê đồ ngọt. Kẹo socola caramel Mars® thanh 53g thơm ngon, vừa ăn vừa thưởng trà rất hợp lý và thư giãn. Kẹo socola Mars® chất lượng, hấp dẫn được sản xuất tại Úc', 'Sản phẩm chứa 40% socola sữa, 33% kẹo nougat và 27% caramel bao gồm đường, siro glucoso (được làm từ bột mì), bột sữa tách béo, bơ cacao, cacao khối, dầu thực vật, dầu hướng dương, lactose, chất béo sữa, mạch nha lúa mạch, chất béo thực vật (cọ và hạt mỡ), bột cacao, chất nhũ hoá (E322), muối, lòng trắng trứng, hương vani tự nhiên'),
+(512, 3, 3, 'Sữa Vinamilk', '20529345431697530016s5.jpg', 8500, 75, 'Sữa Vinamilk nổi tiếng với tiêu chuẩn “3 không” nghiêm ngặt là:\r\nKhông sử dụng Hóc – môn tăng trưởng cho bò.\r\nKhông dư lượng thuốc kháng sinh và thuốc trừ sâu.\r\nCuối cùng là không sử dụng chất bảo quản.\r\n', 'Thành phần của sữa chủ yếu gồm: chất béo, chất đạm, hydrat carbon, vitamin A, D3,... Nhờ vậy, sữa còn tăng cường vitamin D3 theo khuyến nghị của EFSA châu Âu giúp hỗ trợ hệ miễn dịch, tăng cường khả năng hấp thụ canxi của cơ thể.'),
+(511, 4, 3, 'Sữa bột nguyên kem Devondale', '10893836331404298271s4.jpg', 490000, 25, 'Hương vị của sữa bột nguyên kem Devondale cũng được đánh giá là thơm ngon. Hương vị béo ngậy nên rất dễ uống, dễ nghiền. Trong thành phần cũng không chứa chất bảo quản, an toàn với mọi lứa tuổi.', 'Sản phẩm sữa Devondale là loại bột sữa được cô đặc từ sữa tươi nguyên kem. Sữa có nguồn gốc từ Úc. Sản phẩm được sản xuất trên dây chuyền công nghệ hiện đại. Quá trình sản xuất được diễn ra nghiêm ngặt, đáp ứng tiêu chuẩn quốc tế. Ngoài ra, còn được làm từ 100% sữa tươi tự nhiên nên bạn có thể yên tâm về sự an toàn đối với sức khỏe.'),
+(510, 3, 3, 'Sữa bột NuCalci', '5400341851902219307s3.jpg', 180000, 35, 'NuCalci là một loại sữa bột đến từ thương hiệu NutiFood. Phù hợp với độ tuổi từ 19 – 50. Sản phẩm được sản xuất với công thức tiên tiến chứa Nano Calcium kích thước siêu mịn. (gấp 100 lần canxi thông thường).', 'Loại sữa giàu canxi cho thanh niên này có chức năng tốt trong việc bổ sung thêm canxi giúp xương chắc khỏe từ bên trong. Đồng thời, trong thành phần sữa cũng có rất nhiều vitamin có lợi cho sức khỏe. Cụ thể là:\r\nVitamin A, D: giúp cơ thể hấp thụ canxi dễ dàng và hiệu quả.\r\nVitamin B: tăng cường hệ miễn dịch, tăng cảm giác ngon miệng và phòng chống bệnh tật.\r\nVà Vitamin E: làm chậm quá trình lão hóa da, giúp da trở nên trẻ trung, mềm mại.\r\n'),
+(509, 3, 3, 'Sữa Milo', '3935023381811769146s2.jpg', 6500, 200, 'Milo là một loại sữa lúa mạch đến từ thương hiệu Nestle nổi tiếng. Hiện nay, loại sữa này rất được lứa tuổi trẻ em thanh niên yêu thích. Và là sự lựa chọn hàng đầu của các bậc phụ huynh để bổ sung canxi cho con em mình.', 'Sữa Milo chứa các thành phần như: Đường, sữa bột tách kem (skimmed milk powder), Protomalt® (chiết xuất từ mầm lúa mạch 1.4%), siro glucose, dầu bơ, dầu thực vật, bột cacao, bột whey, các khoáng chất (magie cacbonat, dicanxi photphat, sắt pyrophosphat), chất nhũ hóa lecithin 332(i) – chiết xuất từ đậu nành (soya lechithin), các vitamin (niacin, biotin, canxi pantothenat, vitamin B6, B1, B2), chất ổn định carrageenan 407, chất tạo ngọt tổng hợp (acessulfame potassium 950, sucralose 995) và hương vani tổng hợp.'),
+(508, 3, 3, 'Sữa Anlene', '190461821675043137s1.jpg', 499000, 75, 'Là dòng sữa chuyên dành cho người lớn, người già và người cao tuổi để phòng ngừa bệnh loãng xương. Ngày nay, không chỉ những người lớn tuổi mà người thuộc tầm trung niên vẫn có thể sử dụng để giảm thiểu đến mức tối đa nguy cơ mắc bệnh khi về già.', 'Anlene được sản xuất bởi hãng Fonterra với những công dụng vượt trội đối với sức khỏe và có thể bổ sung canxi. Sản phẩm là thành quả sau 20 năm nghiên cứu với số tiền đầu tư lên đến 50 triệu NZD để tạo nên một loại sữa với công dụng đặc biệt dành riêng cho hệ xương.'),
+(507, 2, 2, 'Coca Cola', '822170647coca.jpg', 10000, 254, 'Gía: 10.000\r\nTừ thương hiệu loại nước ngọt giải khát Coca Cola được nhiều người yêu thích với hương vị thơm ngon, sảng khoái. 6 lon nước ngọt Coca Cola lon 235ml với lượng gas lớn sẽ giúp bạn xua tan mọi cảm giác mệt mỏi, căng thẳng, đem lại cảm giác thoải mái sau khi hoạt động ngoài trời.\r\n', 'Nước, chất tạo màu...'),
+(506, 2, 2, 'Sá xị', '1425034785saxi.jpg', 8000, 124, 'Sản phẩm nước ngọt truyền thống đặc trưng của nước ngọt Chương Dương mang hương vị độc đáo rất được ưa chuộng. 6 lon sá xị Chương Dương Sleek 330ml với hương nồng nàn tốt cho hệ tiêu hóa, tuần hoàn, làm ấm cơ thể...cung cấp năng lượng và khoáng chất dồi dào xua đi cơn khát, giảm căng thẳng', 'Nước, chất tạo màu...'),
+(505, 2, 2, 'Redbul', '408525279redbull.jpg', 15000, 175, 'Nước tăng lực Redbull thành phần tự nhiên, mùi vị thơm ngon, sảng khoái. Nước tăng lực Redbull 250ml giúp cơ thể bù đắp nước, bổ sung năng lượng, vitamin và các khoáng chất, giúp xua tan cơn khát và cảm giác mệt mỏi. Nước tăng lực không có đường hóa học, không chứa hóa chất độc hại, đảm bảo an toàn', 'Nước, chất tạo màu...'),
+(503, 1, 2, 'C2', '927595550c2.jpg', 6500, 200, 'Được chiết xuất từ những lá trà xanh tự nhiên từ vùng cao nguyên Việt Nam hòa quyện cùng hương chanh tươi mát cho bạn một thức uống giải khát tuyệt vời những ngày nóng bức. Trà xanh chứa hàm lượng chất chống oxy hóa cao, giúp bạn luôn giữ trạng thái năng động và hứng khởi.', 'Trà xanh , nước, chất gia vị...'),
+(504, 2, 2, 'Sting', '459849462sting.jpg', 12000, 150, 'Sản phẩm nước tăng lực với mùi vị thơm ngon, sảng khoái, bổ sung hồng sâm chất lượng. Nước tăng lực Sting giúp cơ thể bù đắp nước, bổ sung năng lượng, vitamin C và E, giúp xua tan cơn khát và cảm giác mệt mỏi cùng dâu cho nhẹ nhàng và dễ chịu. Cam kết chính hãng, chất lượng và an toàn\r\n\r\n', 'Nước, tạo màu....');
+
 -- --------------------------------------------------------
 
 --
@@ -218,7 +189,7 @@ CREATE TABLE `users` (
   `UserName` varchar(20) NOT NULL,
   `PassWord` varchar(32) NOT NULL,
   `Email` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -292,7 +263,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `CategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `CategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -304,7 +275,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
-  MODIFY `ManufacturerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ManufacturerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -316,7 +287,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=523;
 
 --
 -- AUTO_INCREMENT for table `users`
